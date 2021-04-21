@@ -52,27 +52,3 @@ if __name__ == "__main__":
     iface = args.iface
     show_raw = args.show_raw
     sniff_packets(iface)
-
-# from scapy.all import * 
-
-# def http_header(packet):
-#         http_packet=str(packet)
-#         if http_packet.find('GET'):
-#             return GET_print(packet)
-#         if http_packet.find('POST'):
-#             return POST_print(packet)
-            
-
-# def GET_print(packet1):
-#     ret = "***************************************GET PACKET****************************************************\n"
-#     ret += "\n".join(packet1.sprintf("{Raw:%Raw.load%}\n").split(r"\r\n"))
-#     ret += "*****************************************************************************************************\n"
-#     return ret
-
-# def POST_print(packet1):
-#     ret = "***************************************POST PACKET****************************************************\n"
-#     ret += "\n".join(packet1.sprintf("{Raw:%Raw.load%}\n").split(r"\r\n"))
-#     ret += "*****************************************************************************************************\n"
-#     return ret
-
-# sniff(iface='lo', prn=http_header, filter="tcp port 80")
