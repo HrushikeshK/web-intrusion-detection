@@ -40,29 +40,27 @@ def detect_sqli(query):
 def detect_xss(query):
     # "script" and "on" alerts
     regex = re.compile('(\b)(on\S+)(\s*)=|javascript|(<\s*)(\/*)script', re.IGNORECASE)
-    if regex.search(query)
+    if regex.search(query):
         return True
     
     # Simple XSS attacks
     regex = re.compile('((\%3C)|<)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|>)')
-    if regex.search(query)
+    if regex.search(query):
         return True
 
 
     # XSS for "<img src" attack
     regex = re.compile('((\%3C)|<)((\%69)|i|(\%49))((\%6D)|m|(\%4D))((\%67)|g|(\%47))[^\n]+((\%3E)|>)')
-    if regex.search(query)
+    if regex.search(query):
         return True
 
     # XSS with anything with "<" or ">". Paranoid XSS detection
     regex = re.compile('((\%3C)|<)[^\n]+((\%3E)|>)')
-    if regex.search(query)
+    if regex.search(query):
         return True
 
     return False
 
 
 
-def detect_rce(query):
-    pass
 
