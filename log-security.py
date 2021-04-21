@@ -12,7 +12,7 @@ with open('apache_logs') as fp:
             print("Exception: ", sys.exc_info()[0])
 
 
-def detect_sqli(payload):
+def detect_sqli(query):
 
     #Clear Text SQL injection test, will create false positives. 
     regex=re.compile('drop|delete|truncate|update|insert|select|declare|union|create|concat', re.IGNORECASE)
@@ -37,9 +37,32 @@ def detect_sqli(payload):
     return False
 
 
-def detect_xss(payload):
-    pass
+def detect_xss(query):
+    # "script" and "on" alerts
+    regex = re.compile('(\b)(on\S+)(\s*)=|javascript|(<\s*)(\/*)script', re.IGNORECASE)
+    if regex.search(query)
+        return True
+    
+    # Simple XSS attacks
+    regex = re.compile('((\%3C)|<)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|>)')
+    if regex.search(query)
+        return True
 
-def detect_rce(payload):
+
+    # XSS for "<img src" attack
+    regex = re.compile('((\%3C)|<)((\%69)|i|(\%49))((\%6D)|m|(\%4D))((\%67)|g|(\%47))[^\n]+((\%3E)|>)')
+    if regex.search(query)
+        return True
+
+    # XSS with anything with "<" or ">". Paranoid XSS detection
+    regex = re.compile('((\%3C)|<)[^\n]+((\%3E)|>)')
+    if regex.search(query)
+        return True
+
+    return False
+
+
+
+def detect_rce(query):
     pass
 
