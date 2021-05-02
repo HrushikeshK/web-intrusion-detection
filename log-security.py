@@ -75,7 +75,6 @@ with open('apache_logs') as fp:
         try:
             query = entry.request_line.split(" ")[1] 
             ip = entry.remote_host
-            # print(f"{query}: {ip}")
             check_vulns(query, ip)
         except:
             print("Exception: ", sys.exc_info()[0])
