@@ -63,14 +63,14 @@ def detect_xss(query):
 
 def detect_xxe(query):
     regex = re.compile('((\%3C)|<)[^\n]+((\%3E)|>)')
-    if regex.search(query) and if '<!DOCTYPE' in query:
+    if regex.search(query) and '<!DOCTYPE' in query:
         return True
 
 
 
 def check_vulns(url,req_data, ip):
     if detect_sqli(url) or detect_sqli(req_data):
-        print(f"\n{RED}SQLi detected:{RESET} {ip} {url} {req_data}")
+        print(f"\n{RED}Injection detected:{RESET} {ip} {url} {req_data}")
     if detect_xss(url) or detect_xss(req_data):
         print(f"\n{RED}XSS detected:{RESET} {ip} {url} {req_data}")
     if detect_xxe(url) or detect_xxe(req_data):
